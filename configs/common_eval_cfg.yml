@@ -1,0 +1,4 @@
+path: /home/omote/WorkSpace/unilm/kosmos-2/model_weights/kosmos2.pt
+post_process: sentencepiece
+quiet: false
+model_overrides: "{'visual_pretrained': '', 'dict_path':'data/dict.txt'}"

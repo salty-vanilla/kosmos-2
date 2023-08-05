@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from fairseq.dataclass import ChoiceEnum, FairseqDataclass
 
 try:
-    from unilm.data.vl.clip_dl import (
+    from kosmos_2.unilm.data.vl.clip_dl import (
         DataInfo,
         detshuffle2,
         filter_no_caption,

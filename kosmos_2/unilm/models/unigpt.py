@@ -33,9 +33,9 @@ from fairseq.models.transformer_lm import (
   TransformerLanguageModel,
   base_gpt3_architecture,
 )
-from unilm.models.connector import build_connector
-from unilm.models.gpt import GPTmodel, GPTModelConfig
-from unilm.models.gpt_eval import GPTEvalmodel
+from kosmos_2.unilm.models.connector import build_connector
+from kosmos_2.unilm.models.gpt import GPTmodel, GPTModelConfig
+from kosmos_2.unilm.models.gpt_eval import GPTEvalmodel
 
 from torchscale.architecture.config import EncoderConfig
 from torchscale.model.BEiT3 import BEiT3

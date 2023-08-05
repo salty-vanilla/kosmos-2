@@ -23,8 +23,8 @@ import hydra
 import copy
 
 from infinibatch import iterators
-from unilm.data.basic_loader import BaseBatchGen
-from unilm.data.utils import NativeCheckpointableIterator, WeightIterator
+from kosmos_2.unilm.data.basic_loader import BaseBatchGen
+from kosmos_2.unilm.data.utils import NativeCheckpointableIterator, WeightIterator
 
 class VLBaseLoader(BaseBatchGen):
 

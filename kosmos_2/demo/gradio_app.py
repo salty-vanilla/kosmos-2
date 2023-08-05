@@ -9,8 +9,6 @@ Translate raw text with a trained model. Batches data on-the-fly.
 import sys
 sys.path.append( '.' )
 
-import unilm
-
 import ast
 import logging
 import math

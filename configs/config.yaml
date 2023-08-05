@@ -1,0 +1,52 @@
+# @package _group_
+
+hydra:
+  run:
+    dir: .
+
+defaults:
+    - _self_
+    - task:
+        _name: generation_obj
+        data: None
+        sample_break_mode: none
+        tokens_per_sample: 1024
+        output_dictionary_size: -1
+        self_target: false
+        future_target: false
+        past_target: false
+        add_bos_token: true
+        max_target_positions: null
+        shorten_method: none
+        shorten_data_split_list: ''
+        pad_to_fixed_length: false
+        pad_to_fixed_bsz: false
+        seed: 1
+        batch_size: 1
+        batch_size_valid: 1
+        dataset_impl: null
+        data_buffer_size: 10
+        tpu: false
+        use_plasma_view: false
+        plasma_path: /tmp/plasma
+        required_batch_size_multiple: 1
+        dict_path: /home/omote/WorkSpace/unilm/kosmos-2/data/dict.txt
+        image_feature_length: 64
+        input_resolution: 1024
+        # input_resolution: 224
+        location_bin_size: 32
+        locate_special_token: 1
+    - model: null
+    - criterion: cross_entropy
+    - optimizer: null
+    - lr_scheduler: fixed
+    - bpe: null
+    - tokenizer: null
+    - scoring: null
+    - generation: null
+    - common_eval:
+        path: /home/omote/WorkSpace/unilm/kosmos-2/model_weights/kosmos2.pt
+        post_process: sentencepiece
+        quiet: false
+        model_overrides: "{'visual_pretrained': '', 'dict_path':'data/dict.txt'}"
+    - eval_lm: null

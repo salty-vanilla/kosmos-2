@@ -28,11 +28,11 @@ import torchvision.transforms as T
 from torchvision.transforms import CenterCrop, Compose, Normalize, Resize, ToTensor
 
 from infinibatch import iterators
-from unilm.data.basic_loader import BaseBatchGen
-from unilm.data.utils import NativeCheckpointableIterator, WeightIterator
-from unilm.data.vl.vl_base_loader import VLBaseLoader
-from unilm.data.vl.laion2b_loader import Laion2BLoader, NumpyNormalize
-from unilm.data.vl.obj_utils import *
+from kosmos_2.unilm.data.basic_loader import BaseBatchGen
+from kosmos_2.unilm.data.utils import NativeCheckpointableIterator, WeightIterator
+from kosmos_2.unilm.data.vl.vl_base_loader import VLBaseLoader
+from kosmos_2.unilm.data.vl.laion2b_loader import Laion2BLoader, NumpyNormalize
+from kosmos_2.unilm.data.vl.obj_utils import *
 
 from PIL import Image
 import base64

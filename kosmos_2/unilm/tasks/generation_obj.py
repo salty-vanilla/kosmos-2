@@ -30,7 +30,7 @@ from fairseq.tasks.language_modeling import LanguageModelingConfig, LanguageMode
 from fairseq.data import Dictionary, data_utils
 from omegaconf import II
 from fairseq import metrics, search, tokenizer, utils
-from unilm.data.utils import SPECIAL_SYMBOLS, add_location_symbols
+from kosmos_2.unilm.data.utils import SPECIAL_SYMBOLS, add_location_symbols
 
 import pdb
 

@@ -4,8 +4,8 @@ import sys
 import time
 import torch
 from infinibatch.iterators import CheckpointableIterator
-from unilm.data import utils
-from unilm.data.utils import ConcatIterator, MixIterator
+from kosmos_2.unilm.data import utils
+from kosmos_2.unilm.data.utils import ConcatIterator, MixIterator
 
 
 class BaseBatchGen(CheckpointableIterator):

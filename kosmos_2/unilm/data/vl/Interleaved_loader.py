@@ -24,9 +24,9 @@ import itertools
 from torchvision.transforms import CenterCrop, Compose, Normalize, Resize, ToTensor
 
 from infinibatch import iterators
-from unilm.data.basic_loader import BaseBatchGen
-from unilm.data.utils import NativeCheckpointableIterator, WeightIterator
-from unilm.data.vl.vl_base_loader import VLBaseLoader
+from kosmos_2.unilm.data.basic_loader import BaseBatchGen
+from kosmos_2.unilm.data.utils import NativeCheckpointableIterator, WeightIterator
+from kosmos_2.unilm.data.vl.vl_base_loader import VLBaseLoader
 
 from PIL import Image
 import base64

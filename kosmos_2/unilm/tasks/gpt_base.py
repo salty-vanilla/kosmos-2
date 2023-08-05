@@ -13,8 +13,8 @@ from fairseq import utils
 from fairseq.data import Dictionary
 from fairseq.tasks import FairseqTask, register_task
 # from unilm.data.lm_loader import LMLoader
-from unilm.data.spm_lm_loader import SpmLmLoader as LMLoader
-from unilm.data.utils import SPECIAL_SYMBOLS, add_location_symbols
+from kosmos_2.unilm.data.spm_lm_loader import SpmLmLoader as LMLoader
+from kosmos_2.unilm.data.utils import SPECIAL_SYMBOLS, add_location_symbols
 from fairseq.optim.amp_optimizer import AMPOptimizer
 from fairseq.dataclass import FairseqDataclass, ChoiceEnum
 from fairseq.data.encoders.gpt2_bpe import GPT2BPE

@@ -1,0 +1,5 @@
+_defaults:
+  - override /task: task
+
+param1: default_value1
+param2: default_value2

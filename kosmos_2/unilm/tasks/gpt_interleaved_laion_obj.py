@@ -8,15 +8,15 @@ import torch
 from fairseq.optim.amp_optimizer import AMPOptimizer
 from fairseq.tasks import FairseqTask, register_task
 # from unilm.data.lm_loader import LMLoader
-from unilm.data.spm_lm_loader import SpmLmLoader as LMLoader
-from unilm.tasks.gpt_base import GPTPretrainingConfig, GPTTask
-from unilm.data.basic_loader import MixLoader
+from kosmos_2.unilm.data.spm_lm_loader import SpmLmLoader as LMLoader
+from kosmos_2.unilm.tasks.gpt_base import GPTPretrainingConfig, GPTTask
+from kosmos_2.unilm.data.basic_loader import MixLoader
 
-from unilm.data.vl.vl_loader import WdsLoaderConfig
+from kosmos_2.unilm.data.vl.vl_loader import WdsLoaderConfig
 
-from unilm.data.vl.Interleaved_loader import InterleavedLoader
-from unilm.data.vl.laion2b_loader import Laion2BLoader
-from unilm.data.vl.laion2b_obj_loader import Laion2BObjLoader
+from kosmos_2.unilm.data.vl.Interleaved_loader import InterleavedLoader
+from kosmos_2.unilm.data.vl.laion2b_loader import Laion2BLoader
+from kosmos_2.unilm.data.vl.laion2b_obj_loader import Laion2BObjLoader
 from deepspeed.runtime.engine import DeepSpeedEngine
 
 logger = logging.getLogger(__name__)
