@@ -8,6 +8,7 @@ import time
 from argparse import Namespace
 from collections import namedtuple
 
+import ast
 import numpy as np
 import sentencepiece as spm
 import torch
@@ -22,6 +23,7 @@ from fairseq.token_generation_constraints import pack_constraints, unpack_constr
 from omegaconf import OmegaConf
 
 from kosmos_2.unilm.tasks import *
+from kosmos_2.unilm.models.unigpt import *
 
 import matplotlib.pyplot as plt
 
@@ -207,6 +209,64 @@ def main(cfg: FairseqConfig):
     if isinstance(cfg, Namespace):
         cfg = convert_namespace_to_omegaconf(cfg)
     logger.info(cfg)
+
+    utils.import_user_module(cfg.common)
+
+    cfg.interactive.buffer_size = 1
+    if cfg.dataset.max_tokens is None and cfg.dataset.batch_size is None:
+        cfg.dataset.batch_size = 1
+
+    assert (
+        not cfg.generation.sampling or cfg.generation.nbest == cfg.generation.beam
+    ), "--sampling requires --nbest to be equal to --beam"
+    assert (
+        not cfg.dataset.batch_size
+        or cfg.dataset.batch_size <= cfg.interactive.buffer_size
+    ), "--batch-size cannot be larger than --buffer-size"
+
+    # Fix seed for stochastic decoding
+    if cfg.common.seed is not None and not cfg.generation.no_seed_provided:
+        np.random.seed(cfg.common.seed)
+        utils.set_torch_seed(cfg.common.seed)
+
+    use_cuda = torch.cuda.is_available() and not cfg.common.cpu
+
+    # Setup task, e.g., translation
+    logger.info("Task: {}".format(cfg.task))
+    task = tasks.setup_task(cfg.task)
+
+    # Load ensemble
+    overrides = ast.literal_eval(cfg.common_eval.model_overrides)
+    logger.info("loading model(s) from {}".format(cfg.common_eval.path))
+    models, _model_args = checkpoint_utils.load_model_ensemble(
+        utils.split_paths(cfg.common_eval.path),
+        arg_overrides=overrides,
+        task=task,
+        suffix=cfg.checkpoint.checkpoint_suffix,
+        strict=(cfg.checkpoint.checkpoint_shard_count == 1),
+        num_shards=cfg.checkpoint.checkpoint_shard_count,
+    )
+
+    # Set dictionaries
+    src_dict = task.source_dictionary
+    tgt_dict = task.target_dictionary
+
+    # Optimize ensemble for generation
+    for model in models:
+        if model is None:
+            continue
+        if cfg.common.fp16:
+            model.half()
+        if use_cuda and not cfg.distributed_training.pipeline_model_parallel:
+            model.cuda()
+        model.prepare_for_inference_(cfg)
+
+    # Initialize generator
+    generator = task.build_generator(models, cfg.generation)
+
+    # Handle tokenization and BPE
+    tokenizer = task.build_tokenizer(cfg.tokenizer)
+    bpe = task.build_bpe(cfg.bpe)
 
 
 def cli_main():
