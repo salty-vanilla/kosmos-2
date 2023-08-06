@@ -164,7 +164,7 @@ class GPTEvalmodel(TransformerLanguageModel):
                 args.fp16_no_flatten_grads
             ), "If training moe models, set --fp16-no-flatten-grads to calculate correct gradnorm"
 
-        args.ddp_rank = distributed_utils.get_data_parallel_rank()
+        # args.ddp_rank = distributed_utils.get_data_parallel_rank()
 
         config = DecoderConfig()
         config.override(args)

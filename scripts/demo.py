@@ -251,6 +251,8 @@ def main(cfg: FairseqConfig):
     src_dict = task.source_dictionary
     tgt_dict = task.target_dictionary
 
+    logger.info(cfg.distributed_training)
+
     # Optimize ensemble for generation
     for model in models:
         if model is None:
@@ -272,7 +274,8 @@ def main(cfg: FairseqConfig):
 def cli_main():
     parser = options.get_interactive_generation_parser()
     args = options.parse_args_and_arch(parser)
-    distributed_utils.call_main(convert_namespace_to_omegaconf(args), main)
+    main(convert_namespace_to_omegaconf(args))
+    # distributed_utils.call_main(convert_namespace_to_omegaconf(args), main)
 
 if __name__ == "__main__":
     cli_main()
